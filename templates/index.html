@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SupportMind AI</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef2ff,
+                    #f8fafc,
+                    #ecfeff
+                );
+
+            color: #172033;
+
+            padding: 30px;
+        }
+
+
+        .container {
+            max-width: 1000px;
+
+            margin: 0 auto;
+        }
+
+
+        /* HEADER */
+
+        .header {
+            background: white;
+
+            border-radius: 24px;
+
+            padding: 28px;
+
+            margin-bottom: 22px;
+
+            box-shadow:
+                0 10px 35px
+                rgba(15, 23, 42, 0.08);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+
+        .brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .logo {
+            width: 58px;
+
+            height: 58px;
+
+            border-radius: 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 30px;
+
+            background: #eef2ff;
+        }
+
+
+        .brand h1 {
+            font-size: 25px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .brand p {
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        .status {
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            background: #ecfdf5;
+
+            color: #047857;
+
+            padding: 9px 14px;
+
+            border-radius: 30px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        .status-dot {
+            width: 8px;
+
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #10b981;
+        }
+
+
+        /* MAIN CARD */
+
+        .card {
+            background: white;
+
+            border-radius: 24px;
+
+            padding: 28px;
+
+            margin-bottom: 22px;
+
+            box-shadow:
+                0 10px 35px
+                rgba(15, 23, 42, 0.08);
+        }
+
+
+        .section-title {
+            font-size: 18px;
+
+            font-weight: 700;
+
+            margin-bottom: 18px;
+        }
+
+
+        label {
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: #475569;
+
+            margin-bottom: 8px;
+        }
+
+
+        input,
+        textarea {
+            width: 100%;
+
+            border: 1px solid #dbe3ef;
+
+            border-radius: 14px;
+
+            padding: 14px 16px;
+
+            font-size: 15px;
+
+            font-family: inherit;
+
+            outline: none;
+
+            transition: 0.2s;
+
+            background: #fbfdff;
+        }
+
+
+        input:focus,
+        textarea:focus {
+            border-color: #6366f1;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(99, 102, 241, 0.10);
+        }
+
+
+        textarea {
+            min-height: 120px;
+
+            resize: vertical;
+
+            margin-bottom: 15px;
+        }
+
+
+        .send-button {
+            border: none;
+
+            background: #4f46e5;
+
+            color: white;
+
+            padding: 13px 24px;
+
+            border-radius: 13px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+            float: right;
+        }
+
+
+        .send-button:hover {
+            background: #4338ca;
+
+            transform: translateY(-1px);
+        }
+
+
+        .send-button:disabled {
+            opacity: 0.6;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        .clear {
+            clear: both;
+        }
+
+
+        /* RESPONSE */
+
+        .response-card {
+            display: none;
+        }
+
+
+        .response-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .ai-icon {
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 13px;
+
+            background: #eef2ff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 21px;
+        }
+
+
+        .response-text {
+            background: #f8fafc;
+
+            border-radius: 16px;
+
+            padding: 20px;
+
+            line-height: 1.7;
+
+            color: #334155;
+
+            white-space: pre-wrap;
+
+            font-size: 15px;
+        }
+
+
+        /* MEMORY */
+
+        .memory-card {
+            display: none;
+        }
+
+
+        .memory-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 18px;
+        }
+
+
+        .memory-title {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .memory-count {
+            background: #eef2ff;
+
+            color: #4f46e5;
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        .memory-item {
+            background: #f8fafc;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 14px;
+
+            padding: 14px 16px;
+
+            margin-bottom: 10px;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            color: #475569;
+        }
+
+
+        .memory-item::before {
+            content: "🧠";
+
+            margin-right: 9px;
+        }
+
+
+        /* SAVED MESSAGE */
+
+        .saved {
+            display: none;
+
+            background: #ecfdf5;
+
+            border: 1px solid #a7f3d0;
+
+            color: #047857;
+
+            border-radius: 13px;
+
+            padding: 12px 15px;
+
+            margin-top: 18px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        /* ERROR */
+
+        .error {
+            display: none;
+
+            background: #fef2f2;
+
+            border: 1px solid #fecaca;
+
+            color: #b91c1c;
+
+            border-radius: 13px;
+
+            padding: 12px 15px;
+
+            margin-top: 18px;
+
+            font-size: 14px;
+        }
+
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            padding: 10px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 15px;
+            }
+
+
+            .header {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+
+            .card {
+                padding: 20px;
+            }
+
+
+            .send-button {
+                width: 100%;
+
+                float: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="brand">
+
+            <div class="logo">
+                🧠
+            </div>
+
+            <div>
+
+                <h1>
+                    SupportMind AI
+                </h1>
+
+                <p>
+                    Customer support powered by
+                    persistent memory
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            Hindsight Memory Active
+
+        </div>
+
+    </div>
+
+
+    <!-- CUSTOMER MESSAGE -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            💬 Talk to Support
+
+        </div>
+
+
+        <label for="userId">
+            Customer ID
+        </label>
+
+        <input
+            id="userId"
+            type="text"
+            value="customer1"
+            placeholder="Enter customer ID"
+        >
+
+
+        <br><br>
+
+
+        <label for="message">
+            Your Message
+        </label>
+
+        <textarea
+            id="message"
+            placeholder="Describe your issue..."
+        ></textarea>
+
+
+        <button
+            class="send-button"
+            id="sendButton"
+            onclick="sendMessage()"
+        >
+            Send Message
+        </button>
+
+
+        <div class="clear"></div>
+
+
+        <div
+            class="saved"
+            id="savedMessage"
+        >
+            ✓ Conversation saved to Hindsight memory.
+        </div>
+
+
+        <div
+            class="error"
+            id="errorMessage"
+        >
+        </div>
+
+    </div>
+
+
+    <!-- AI RESPONSE -->
+
+    <div
+        class="card response-card"
+        id="responseCard"
+    >
+
+        <div class="response-header">
+
+            <div class="ai-icon">
+                🤖
+            </div>
+
+            <div>
+
+                <div class="section-title"
+                     style="margin-bottom: 2px;">
+
+                    AI Support Agent
+
+                </div>
+
+                <div
+                    style="
+                    color:#64748b;
+                    font-size:13px;
+                    "
+                >
+                    Personalized response using memory
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="response-text"
+            id="responseText"
+        >
+        </div>
+
+    </div>
+
+
+    <!-- MEMORY -->
+
+    <div
+        class="card memory-card"
+        id="memoryCard"
+    >
+
+        <div class="memory-header">
+
+            <div class="memory-title">
+
+                <span style="font-size:23px;">
+                    🧠
+                </span>
+
+                <div>
+
+                    <div
+                        class="section-title"
+                        style="margin-bottom:2px;"
+                    >
+                        Hindsight Memory
+                    </div>
+
+                    <div
+                        style="
+                        color:#64748b;
+                        font-size:13px;
+                        "
+                    >
+                       Relevant information recalled from previous conversations
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="memory-count" id="memoryCount"
+            >
+                0 memories
+            </div>
+
+        </div>
+
+
+        <div id="memoryList">
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        Built with Flask • Groq • Hindsight
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+async function sendMessage() {
+
+    const userId =
+        document.getElementById("userId").value.trim();
+
+    const message =
+        document.getElementById("message").value.trim();
+
+    const sendButton =
+        document.getElementById("sendButton");
+
+    const responseCard =
+        document.getElementById("responseCard");
+
+    const responseText =
+        document.getElementById("responseText");
+
+    const memoryCard =
+        document.getElementById("memoryCard");
+
+    const memoryList =
+        document.getElementById("memoryList");
+
+    const memoryCount =
+        document.getElementById("memoryCount");
+
+    const savedMessage =
+        document.getElementById("savedMessage");
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+
+    // Check customer ID
+
+    if (!userId) {
+
+        errorMessage.style.display = "block";
+
+        errorMessage.textContent =
+            "Please enter a Customer ID.";
+
+        return;
+    }
+
+
+    // Check message
+
+    if (!message) {
+
+        errorMessage.style.display = "block";
+
+        errorMessage.textContent =
+            "Please enter a message.";
+
+        return;
+    }
+
+
+    // Disable button
+
+    sendButton.disabled = true;
+
+    sendButton.textContent =
+        "AI is thinking...";
+
+
+    errorMessage.style.display =
+        "none";
+
+    savedMessage.style.display =
+        "none";
+
+
+    responseCard.style.display =
+        "block";
+
+    responseText.textContent =
+        "Thinking...";
+
+
+    memoryCard.style.display =
+        "none";
+
+
+    try {
+
+        const result =
+            await fetch(
+                "/chat",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+                            user_id: userId,
+                            message: message
+                        })
+                }
+            );
+
+
+        const data =
+            await result.json();
+
+
+        if (!result.ok) {
+
+            throw new Error(
+                data.error ||
+                "Something went wrong."
+            );
+        }
+
+
+        // -----------------------------
+        // AI RESPONSE
+        // -----------------------------
+
+        responseText.textContent =
+            data.response ||
+            "No response received.";
+
+
+        // -----------------------------
+        // HINDSIGHT MEMORY
+        // -----------------------------
+
+        const memories =
+            data.memories || [];
+
+
+        if (memories.length > 0) {
+
+            memoryCard.style.display =
+                "block";
+
+            memoryList.innerHTML =
+                "";
+
+
+            memoryCount.textContent =
+                memories.length +
+                (
+                    memories.length === 1
+                    ? " memory"
+                    : " memories"
+                );
+
+
+            memories.forEach(
+                function(memory) {
+
+                    const item =
+                        document.createElement("div");
+
+
+                    item.className =
+                        "memory-item";
+
+
+                    // Remove Hindsight metadata
+
+                    let cleanMemory =
+                        memory
+                        .replace(
+                            /\s*\|\s*When:\s*[^|]+/gi,
+                            ""
+                        )
+                        .replace(
+                            /\s*\|\s*Involving:\s*[^|]+/gi,
+                            ""
+                        )
+                        .replace(
+                            /\s*\|\s*To resolve:\s*[^|]+/gi,
+                            ""
+                        )
+                        .replace(
+                            /\s*\|\s*To identify.*$/gi,
+                            ""
+                        )
+                        .trim();
+
+
+                    item.textContent =
+                        cleanMemory;
+
+
+                    memoryList.appendChild(
+                        item
+                    );
+
+                }
+            );
+
+        }
+
+
+        // -----------------------------
+        // MEMORY SAVED
+        // -----------------------------
+
+        if (data.memory_saved) {
+
+            savedMessage.style.display =
+                "block";
+
+        }
+
+    }
+
+    catch (error) {
+
+        responseCard.style.display =
+            "none";
+
+        errorMessage.style.display =
+            "block";
+
+        errorMessage.textContent =
+            error.message ||
+            "Something went wrong. Check Command Prompt.";
+
+    }
+
+    finally {
+
+        sendButton.disabled =
+            false;
+
+        sendButton.textContent =
+            "Send Message";
+
+    }
+
+}
+
+
+// Ctrl + Enter = Send
+
+document
+    .getElementById("message")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter" &&
+                event.ctrlKey
+            ) {
+
+                sendMessage();
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+
+</html>
