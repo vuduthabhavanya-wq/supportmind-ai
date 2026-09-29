@@ -1,0 +1,5 @@
+Flask[async]
+groq
+hindsight-client
+python-dotenv
+gunicorn
